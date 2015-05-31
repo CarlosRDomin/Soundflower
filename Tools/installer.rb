@@ -33,7 +33,7 @@ def create_logs
   @error_log.flush
   trap("SIGINT") { die }
 end
-  
+
 def die
   close_logs
   exit 0
@@ -61,7 +61,7 @@ end
 def cmd(commandString)
   out = ""
   err = ""
-  
+
   Open3.popen3(commandString) do |stdin, stdout, stderr|
     out = stdout.read
     err = stderr.read
@@ -74,11 +74,11 @@ end
 def getversion()
   theVersion = "0.0.0"
 
-  f = File.open("#{@installer_root}/System/Library/Extensions/Soundflower.kext/Contents/Info.plist", "r")
+  f = File.open("#{@installer_root}/Library/Extensions/Soundflower.kext/Contents/Info.plist", "r")
   str = f.read
   theVersion = str.match(/<key>CFBundleShortVersionString<\/key>\n.*<string>(.*)<\/string>/).captures[0]
   f.close
-  
+
   puts"  version: #{theVersion}"
   return theVersion;
 end
